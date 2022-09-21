@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import Tasks from './components/Tasks/Tasks';
 import AddTask from './components/AddTask/AddTask';
 import { useEffect } from 'react';
-import { getTasks } from './redux-thunks';
+import { getTasks } from './thunks/thunk-task';
 
 function App() {
   const dispatch = useDispatch();

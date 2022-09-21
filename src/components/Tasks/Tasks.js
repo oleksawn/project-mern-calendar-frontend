@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux/es/exports';
 import Task from '../../common/Task';
 
 export default function Tasks() {
-  const { tasks, error, status } = useSelector((state) => state.task) || []; // get state from store
-  console.log(tasks, error, status);
+  const { tasks, error, status } = useSelector((state) => state.tasks) || []; // get state from store
+  // console.log('Tasks component: ',tasksArr, error, status);
   return (
     <div>
       {status === 'loading' && <p>Loading...</p>}
