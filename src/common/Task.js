@@ -1,29 +1,30 @@
 import { Button, Card, CardContent, Typography, Checkbox } from '@mui/material';
-import {useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
   deleteTaskAndRenew,
   changeTaskStatusAndRenew,
 } from '../thunks/thunk-task';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import dayjs from 'dayjs';
 
-export default function Task({ task }) {  
+export default function Task({ task }) {
   const [status, setStatus] = useState(task.status);
   const dispatch = useDispatch();
 
   const handleStatusChange = () => {
-    dispatch(changeTaskStatusAndRenew({id: task._id, status: !status}));
-  }
+    dispatch(changeTaskStatusAndRenew({ id: task._id, status: !status }));
+  };
   const handleDeleteButton = () => {
     dispatch(deleteTaskAndRenew(task._id));
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     setStatus(task.status);
-  }, [task.status])
+  }, [task.status]);
 
   return (
-    <Card sx={{ minWidth: 275 }}>
+    <Card sx={{ minWidth: 275 }} className="task" data-id={task._id}>
       <CardContent>
         <Checkbox
           checked={status}
@@ -32,7 +33,7 @@ export default function Task({ task }) {
         />
         <Button onClick={handleDeleteButton}>delete</Button>
         <Typography sx={{ fontSize: 16 }} color="text.secondary">
-          {task.title} {task._id}
+          {task.title} {task.date && dayjs(task.date).format('D MMM')}
         </Typography>
       </CardContent>
     </Card>

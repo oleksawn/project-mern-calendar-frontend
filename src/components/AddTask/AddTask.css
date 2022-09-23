@@ -1,0 +1,15 @@
+.task_add {
+  position: relative;
+}
+
+.btn_set-date {
+  width: 20px;
+}
+
+.input_task-title {
+  width: 90%;
+}
+
+.btn_save-form {
+  width: 20px;
+}
