@@ -38,7 +38,7 @@ const AddTask = () => {
             setTaskDate={setTaskDate}
           />
           <Input
-          className="input_task-title"
+            className="input_task-title"
             placeholder="Add new task here..."
             value={taskTitle}
             onChange={(e) => handleTaskTitleChange(e)}

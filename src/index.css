@@ -1,13 +1,38 @@
+@font-face {
+  font-family: "Ermilov";
+  src: url("../public/Ermilov.otf");
+  font-style: normal;
+  font-weight: bold;
+}
+
+:root {
+  --color-text: #563e20;
+  --color-mark: #fa6e59;
+  --color-mark-more: #eb8a3e;
+  --color-mark-secondary: #f8a055;
+  --color-devide-light: #ffeee9;
+  --color-light: #fff5e9;
+  --color-white: #fcfdfe;
+}
+
+:root {
+  --font-mark: 'Ermilov';
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: 'Roboto', 'Oxygen','Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: var(--color-text);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+
+/*--color-mark-secondary: #fa6e59; */

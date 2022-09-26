@@ -1,47 +1,38 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useReference } from 'react';
 import { useDispatch } from 'react-redux';
 import dayjs from 'dayjs';
-import { Container } from '@mui/material';
-import Tasks from './components/Tasks/Tasks';
-import Calendar from './common/Calendar/Calendar';
-import AddTask from './components/AddTask/AddTask';
-import './App.css';
 
 import { getTasks } from './thunks/thunk-task';
+import useResizeWindow from './hooks/useResizeWindow';
+
+import Spheres from './components/Spheres/Spheres';
+import DatePicker from './components/DatePicker/DatePicker';
+import Dated from './components/Dated/Dated';
+import MainView from './components/MainView/MainView';
+
+import './App.css';
 
 function App() {
-  const [calendarDate, setCalendarDate] = useState(dayjs());
+  const [dateView, setDateView] = useState(dayjs());
+  // const appRef = useReference();
+  const windowSize = useResizeWindow();
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getTasks());
   }, [dispatch]);
 
-  const CALENDARS_AMOUNT =
-    window.innerWidth > 1600 ? 3 : window.innerWidth > 1100 ? 2 : 1;
   return (
-    <Container maxWidth="false">
-      <div className="grid_container">
-        <div className="spheres_container container">
-          <Tasks />
-        </div>
-
-        <div className="calendar_container container">
-          <Calendar
-            calendars={{ amount: CALENDARS_AMOUNT, main: 1 }}
-            selectedDate={calendarDate}
-            setSelectedDate={setCalendarDate}
-          />
-        </div>
-
-        <div className="dated_container container">
-          <Tasks dated={true} date={{ type: 'day', date: calendarDate }} />
-        </div>
-
-        <div className="main_container container">
-          <AddTask />
-        </div>
-      </div>
-    </Container>
+    <div className="grid_container">
+      <Spheres dateView={dateView} windowSize={windowSize}/>
+      <DatePicker
+        dateView={dateView}
+        setDateView={setDateView}
+        windowSize={windowSize}
+      />
+      <Dated dateView={dateView} windowSize={windowSize}/>
+      <MainView dateView={dateView} windowSize={windowSize} />
+    </div>
   );
 }
 export default App;
