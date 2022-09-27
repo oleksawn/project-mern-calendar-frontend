@@ -53,6 +53,7 @@ const createRows = (cells) => {
 };
 
 export default function Month({
+  size,
   selectedDate,
   shownMonthShift,
   shownMonth,
@@ -62,8 +63,12 @@ export default function Month({
   const shiftedDate = shownMonth.add(shownMonthShift, 'month');
   const cells = createCells(shiftedDate, fromSunday, selectedDate);
   const rows = createRows(cells);
+
   return (
-    <table className="month">
+    <table
+      className="month"
+      style={{ width: size ? size.width : 300, height: size ? size.height : 200 }}
+    >
       <caption className="month_caption">{shiftedDate.format('MMMM')}</caption>
       <tbody className="month_body">
         {rows.map((row, i) => (

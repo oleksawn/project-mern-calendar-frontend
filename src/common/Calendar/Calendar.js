@@ -13,7 +13,12 @@ const createCalendars = (amount, main) => {
   return calendars;
 };
 
-export default function Calendar({ calendars, selectedDate, setSelectedDate }) {
+export default function Calendar({
+  monthSize,
+  calendars,
+  selectedDate,
+  setSelectedDate,
+}) {
   const [shownMonth, setShownMonth] = useState(selectedDate);
   const calendarsArr = createCalendars(calendars.amount, calendars.main);
   return (
@@ -25,6 +30,7 @@ export default function Calendar({ calendars, selectedDate, setSelectedDate }) {
       />
       {calendarsArr.map(({ shownMonthShift }) => (
         <Month
+          size={monthSize}
           key={shownMonthShift}
           selectedDate={selectedDate}
           shownMonthShift={shownMonthShift}

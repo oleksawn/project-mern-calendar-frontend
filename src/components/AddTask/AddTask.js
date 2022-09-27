@@ -14,7 +14,7 @@ const AddTask = () => {
   const taskRef = useRef();
   const dispatch = useDispatch();
 
-  // console.log('add new task: ',errorTask)
+  //console.log('add new task: ',errorTask)
 
   const handleTaskTitleChange = (e) => {
     setTaskTitle(e.target.value);

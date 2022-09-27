@@ -6,10 +6,11 @@
   margin: 0 auto;
   position: relative;
   display: grid;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
  
   grid-template-columns: 18px auto;
-  grid-auto-rows: 210px auto auto;
+  grid-auto-rows: 120px 200px auto;
   
   grid-template-areas:
     "spheres calendar"
@@ -17,39 +18,52 @@
     "spheres main"
 }
 .spheres_container {
-  min-width: 18px;
   grid-area: spheres;
 }
+
 .calendar_container {
-  min-width: 300px;
   grid-area: calendar;
   border-bottom: 1px solid var(--color-mark);
-  overflow-y: auto;
+  overflow: auto;
 }
 .main_container {
-  min-width: 450px;
+  min-width: 400px;
   grid-area: main;
+  position: relative;
+  padding: 0;
+  height: calc(100vh - 320px);
+  overflow: hidden;
+}
+.main_wrapper {
+  height: calc(100% - 68px);
+  overflow: auto;
 }
 .dated_container {
-  min-width: 350px;
   grid-area: dated;
+  overflow: auto;
 }
 
 @media screen and (min-width: 900px) {
     .grid_container {
       grid-template-columns: 18px 5fr 2fr;
-      grid-auto-rows: 245px auto;
+      grid-auto-rows: 180px auto;
       grid-template-areas:
         "spheres calendar dated"
         "spheres main dated"
     }
+    .dated_container {
+      min-width: 350px;
+      overflow: auto;
+    }
+    .main_container {
+      height: calc(100vh - 180px);
+    }
 }
 
-@media screen and (min-width: 1600px) {
+@media screen and (min-width: 1400px) {
   .grid_container {
       max-width: 2200px;
-      grid-template-columns: 2.5fr minmax(450px, 5fr) 2fr;
-      grid-auto-rows: 245px auto;
+      grid-template-columns: 2.5fr 5fr 2fr;
     }
 }
 

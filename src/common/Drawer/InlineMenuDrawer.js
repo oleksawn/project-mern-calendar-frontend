@@ -1,8 +1,6 @@
 import { Grid, Box, Drawer } from '@mui/material';
-import Menu from './Menu';
 
-const InlineDrawer = ({ children, menuChapters, size }) => {
-  console.log(children);
+const InlineMenuDrawer = ({ children, menuComponent, size, menuWidth }) => {
   return (
     <Grid
       container
@@ -13,22 +11,18 @@ const InlineDrawer = ({ children, menuChapters, size }) => {
         overflow: 'hidden',
       }}
     >
-      <Menu
-        chapters={menuChapters}
-        classes={{ height: size.height, width: size.menuWidth }}
-      />
-
+      {menuComponent()}
       <Grid
         item
         sx={{
-          width: `calc(100% - ${size.menuWidth}px)`,
+          width: `calc(100% - ${menuWidth.width}px)`,
           position: 'relative',
           overflow: 'hidden',
         }}
       >
         <Drawer
           sx={{
-            '& .MuiPaper-root': {
+            '.MuiPaper-root.MuiDrawer-paper': {
               position: 'absolute',
               width: '100%',
             },
@@ -38,13 +32,7 @@ const InlineDrawer = ({ children, menuChapters, size }) => {
           variant="permanent"
           anchor="left"
         >
-          <Box
-            sx={{
-              '& .MuiPaper-root': {
-                position: 'static',
-              },
-            }}
-          >
+          <Box>
             {children}
           </Box>
         </Drawer>
@@ -52,4 +40,4 @@ const InlineDrawer = ({ children, menuChapters, size }) => {
     </Grid>
   );
 };
-export default InlineDrawer;
+export default InlineMenuDrawer;

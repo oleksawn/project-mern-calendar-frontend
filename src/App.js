@@ -1,9 +1,9 @@
-import { useEffect, useState, useReference } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import dayjs from 'dayjs';
 
 import { getTasks } from './thunks/thunk-task';
-import useResizeWindow from './hooks/useResizeWindow';
+import useResize from './hooks/useResize';
 
 import Spheres from './components/Spheres/Spheres';
 import DatePicker from './components/DatePicker/DatePicker';
@@ -13,9 +13,8 @@ import MainView from './components/MainView/MainView';
 import './App.css';
 
 function App() {
-  const [dateView, setDateView] = useState(dayjs());
-  // const appRef = useReference();
-  const windowSize = useResizeWindow();
+  const [dateForView, setDateForView] = useState(dayjs());
+  const windowSize = useResize();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,14 +23,10 @@ function App() {
 
   return (
     <div className="grid_container">
-      <Spheres dateView={dateView} windowSize={windowSize}/>
-      <DatePicker
-        dateView={dateView}
-        setDateView={setDateView}
-        windowSize={windowSize}
-      />
-      <Dated dateView={dateView} windowSize={windowSize}/>
-      <MainView dateView={dateView} windowSize={windowSize} />
+      <Spheres dateForView={dateForView} windowSize={windowSize.window} />
+      <DatePicker dateForView={dateForView} setDateForView={setDateForView} />
+      <Dated dateForView={dateForView} />
+      <MainView dateForView={dateForView} />
     </div>
   );
 }

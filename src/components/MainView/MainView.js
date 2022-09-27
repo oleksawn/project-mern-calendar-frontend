@@ -1,11 +1,14 @@
-import React from 'react';
 import AddTask from '../AddTask/AddTask'
+import Tasks from '../../common/Tasks/Tasks';
 
-const MainView = ({ windowSize, dateView }) => {
-  
+const MainView = ({ dateForView }) => {
+
   return (
     <div className="main_container container">
-      <AddTask />
+      <div className="main_wrapper">
+        <Tasks />
+      </div>
+      <AddTask dateForView={dateForView} />;
     </div>
   );
 };

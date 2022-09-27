@@ -1,6 +1,10 @@
-import MenuDrawer from '../../common/MenuDrawer/MenuDrawer';
+import { useState } from 'react';
+import PopMenuDrawer from '../../common/Drawer/PopMenuDrawer';
 import Tasks from '../../common/Tasks/Tasks';
-import InlineDrawer from '../../common/MenuDrawer/InlineDrawer';
+import InlineMenuDrawer from '../../common/Drawer/InlineMenuDrawer';
+import SpheresMenu from './SpheresMenu';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
 
 const spheres = [
   { title: 'sources', color: '#5cc5ef' },
@@ -10,25 +14,83 @@ const spheres = [
   { title: 'no', color: '#a3a599' },
 ];
 
-const Spheres = ({ windowSize, dateView }) => {
-  const [, , LARGE_WINDOW, EXTRA_WINDOW, HEIGHT] = windowSize;
-  const SHOW_SPHERES = LARGE_WINDOW || EXTRA_WINDOW;
+const Spheres = ({ windowSize, dateForView }) => {
+  const [, , LARGE_WINDOW, HEIGHT] = windowSize;
+  const [open, setOpen] = useState(false);
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
+
+  const menuWidth = 18;
+
   return (
     <div className="spheres_container">
-      {SHOW_SPHERES ? (
-        <InlineDrawer
-          menuChapters={spheres}
-          size={{ menuWidth: 18, height: HEIGHT }}
+      {LARGE_WINDOW ? (
+        <InlineMenuDrawer
+          size={{ height: HEIGHT }}
+          menuWidth={{ width: menuWidth }}
+          menuComponent={() => {
+            return (
+              <SpheresMenu
+                chapters={spheres}
+                size={{ width: menuWidth, height: HEIGHT }}
+                open={open}
+                handleDrawerOpen={handleDrawerOpen}
+                handleDrawerClose={handleDrawerClose}
+              />
+            );
+          }}
         >
           <Tasks />
-        </InlineDrawer>
+        </InlineMenuDrawer>
       ) : (
-        <MenuDrawer
-          menuChapters={spheres}
-          size={{ menuWidth: 18, height: HEIGHT, contentWidth: 350 }}
-        >
-          <Tasks />
-        </MenuDrawer>
+        <>
+          <PopMenuDrawer
+            size={{ width: 350, height: HEIGHT }}
+            menuWidth={{ width: menuWidth }}
+            open={open}
+            handleDrawerClose={handleDrawerClose}
+            menuComponent={() => {
+              return (
+                <SpheresMenu
+                  chapters={spheres}
+                  size={{ width: menuWidth, height: HEIGHT }}
+                  open={open}
+                  handleDrawerOpen={handleDrawerOpen}
+                  handleDrawerClose={handleDrawerClose}
+                />
+              );
+            }}
+          >
+            <Tasks />
+          </PopMenuDrawer>
+
+          <IconButton
+            onClick={() => {
+              if (open) handleDrawerClose();
+              else handleDrawerOpen();
+            }}
+            sx={{
+              marginBottom: 1,
+              marginLeft: -1,
+              borderRight: '1px solid var(--color-mark)',
+              color: 'var(--color-mark)',
+              backgroundColor: 'var(--color-white)',
+              position: 'fixed',
+              left: 0,
+              bottom: 0,
+              zIndex: 10000,
+              '&:hover': {
+                backgroundColor: 'var(--color-light)',
+              },
+            }}
+          >
+            <MenuIcon />
+          </IconButton>
+        </>
       )}
     </div>
   );

@@ -1,5 +1,3 @@
-
-
 .calendar {
   display: flex;
   justify-content: center;
@@ -18,8 +16,6 @@
 }
 
 .month {
-  min-width: 200px;
-  max-width: 300px;
   background-color: var(--color-devide-light);
 }
 .month_caption {
@@ -29,23 +25,23 @@
 
 .day {
   position: relative;
-  width: 50px;
-  height: 30px;
   margin: 0;
   padding: 0;
   background-color: var(--color-white);
-  border: 3px solid transparent;
-  border-radius: 5px;
+  border: 2px solid transparent;
+  border-radius: 3px;
+  font-size: 9px;
+  font-weight: 500;
 }
 .day:hover {
-  border: 3px solid var(--color-mark-more);
+  border: 2px solid var(--color-mark-more);
   cursor: pointer;
 }
 .weekend {
   background-color: var(--color-light);
 }
 .today {
-  border: 3px solid var(--color-mark);
+  border: 2px solid var(--color-mark);
 }
 .selected {
  background-color: var(--color-mark-secondary);
@@ -55,6 +51,6 @@
   position: absolute;
   margin: 0;
   padding: 0;
-  top: -6px;
+  top: -3px;
   right: -2px;
 }

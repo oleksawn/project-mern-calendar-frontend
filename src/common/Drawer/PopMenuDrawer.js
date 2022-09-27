@@ -1,51 +1,42 @@
 import * as React from 'react';
 import { Grid, Drawer, Box } from '@mui/material';
-import Menu from './Menu';
 
-export default function MenuDrawer({ children, menuChapters, size }) { 
-  const [open, setOpen] = React.useState(false);
-  const handleDrawerToggle = () => {
-    if (open) setOpen(false);
-    else setOpen(true);
-  };
-
+const PopMenuDrawer= ({ children, menuComponent, size, menuWidth, open, handleDrawerClose }) => { 
   return (
-    <Box sx={{position: 'relative'}}>
+    <Box sx={{ position: 'relative' }}>
       <Drawer
         variant="permanent"
         open={open}
         sx={{
           boxSizing: 'border-box',
           height: size.height,
+          overflow: 'hidden',
         }}
+        onClose={handleDrawerClose}
       >
         <Grid
           container
           direction="row"
           sx={{
             height: size.height,
+            overflow: 'hidden',
             ...(open && {
-              width: size.contentWidth,
+              width: size.width,
               transition: 'width ease 0.6s',
-              overflow: 'auto',
             }),
             ...(!open && {
               transition: 'width ease 0.6s',
-              width: size.menuWidth,
-              overflow: 'hidden',
+              width: menuWidth,
             }),
           }}
         >
-          <Menu
-            chapters={menuChapters}
-            classes={{ height: size.height, width: size.menuWidth }}
-            handleDrawerToggle={handleDrawerToggle}
-          />
-
+          {menuComponent()}
           <Grid
             item
             sx={{
-              width: `calc(100% - ${size.menuWidth}px)`,
+              height: size.height,
+              width: `calc(100% - ${menuWidth.width}px)`,
+              overflow: 'auto',
             }}
           >
             {children}
@@ -55,3 +46,4 @@ export default function MenuDrawer({ children, menuChapters, size }) {
     </Box>
   );
 }
+export default PopMenuDrawer;

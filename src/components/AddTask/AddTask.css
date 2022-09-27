@@ -1,5 +1,10 @@
 .task_add {
-  position: relative;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 95%;
+  padding-left: 5%;
+  background-color: var(--color-light);
 }
 
 .btn_set-date {
