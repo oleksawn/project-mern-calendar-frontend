@@ -5,20 +5,26 @@ import useResize from '../../hooks/useResize';
 const DatePicker = ({ dateForView, setDateForView }) => {
   const pickerRef = useRef();
   const size = useResize({ picker: pickerRef });
-  // console.log('picker', pickerRef.current);
   const [SMALL_WINDOW] = size.window;
   const pickerWidth = pickerRef.current && pickerRef.current.clientWidth;
-
   const CALENDAR_SIZE = SMALL_WINDOW
-    ? { width: 240, height: 140 }
+    ? { width: 280, height: 80 }
     : { width: 300, height: 160 };
-  const CALENDARS_AMOUNT = Math.floor(pickerWidth / CALENDAR_SIZE.width);
+  const CALENDAR_TYPE = SMALL_WINDOW ? 'week' : 'month';
+  const CALENDARS_AMOUNT = SMALL_WINDOW
+    ? 3
+    : Math.floor(pickerWidth / CALENDAR_SIZE.width);
 
   return (
     <div className="calendar_container container" ref={pickerRef}>
       <Calendar
-        monthSize={{ width: CALENDAR_SIZE.width, height: CALENDAR_SIZE.height }}
-        calendars={{ amount: CALENDARS_AMOUNT, main: 1 }}
+        blockSize={{ width: CALENDAR_SIZE.width, height: CALENDAR_SIZE.height }}
+        elements={{
+          amount: CALENDARS_AMOUNT,
+          type: CALENDAR_TYPE,
+          main: 1,
+        }}
+        fromSunday={false}
         selectedDate={dateForView}
         setSelectedDate={setDateForView}
       />

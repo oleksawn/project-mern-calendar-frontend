@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useLayoutEffect, useState } from 'react';
 
 export default function useResize(refs) {
@@ -22,7 +21,6 @@ export default function useResize(refs) {
     return () => window.removeEventListener('resize', handleResize); // when destroy
   }, []);
 
-  
   return {
     window: [SMALL_WINDOW, MEDIUM_WINDOW, LARGE_WINDOW, window.innerHeight],
   };

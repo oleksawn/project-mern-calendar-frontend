@@ -21,6 +21,10 @@ function App() {
     dispatch(getTasks());
   }, [dispatch]);
 
+  useEffect(() => {
+    console.log('app after dateForView change');
+  }, [dateForView]);
+
   return (
     <div className="grid_container">
       <Spheres dateForView={dateForView} windowSize={windowSize.window} />

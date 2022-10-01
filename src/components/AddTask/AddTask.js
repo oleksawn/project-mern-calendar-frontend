@@ -6,6 +6,7 @@ import { FormGroup, Input, Button } from '@mui/material';
 import ErrorModal from '../../common/ErrorModal';
 import AddDate from './AddDate';
 import './AddTask.css';
+import shadows from '@mui/material/styles/shadows';
 
 const AddTask = () => {
   const [taskTitle, setTaskTitle] = useState('');
@@ -13,8 +14,6 @@ const AddTask = () => {
   const { errorTask } = useSelector((state) => state.task) || [];
   const taskRef = useRef();
   const dispatch = useDispatch();
-
-  //console.log('add new task: ',errorTask)
 
   const handleTaskTitleChange = (e) => {
     setTaskTitle(e.target.value);
@@ -30,6 +29,7 @@ const AddTask = () => {
 
   return (
     <div ref={taskRef} className="task_add">
+      {console.log('add task after', taskDate)}
       {Object.keys(errorTask).length === 0 ? (
         <FormGroup>
           <AddDate
@@ -46,7 +46,19 @@ const AddTask = () => {
           />
           <Button
             className="btn_save-form"
-            sx={{ position: 'absolute', bottom: 0, right: 0 }}
+            sx={{
+              position: 'absolute',
+              bottom: 0,
+              right: 0,
+              padding: 0.2,
+              fontSize: 14,
+              color: 'var(--color-mark-secondary)',
+              border: '1px solid var(--color-devide-light)',
+              '&:hover': {
+                border: '1px solid var(--color-mark-secondary)',
+                boxShadow: '10px 10px 10px red'
+              }
+            }}
             variant="outlined"
             onClick={handleTaskSubmit}
           >

@@ -5,14 +5,6 @@ import Calendar from '../../common/Calendar/Calendar';
 const AddDate = ({ taskRef, taskDate, setTaskDate }) => {
   const [selectedDate, setSelectedDate] = useState(taskDate);
   const [open, setOpen] = useState(false);
-  const taskWidth =
-    taskRef.current && taskRef.current.offsetWidth > 300
-      ? taskRef.current.offsetWidth
-      : 300;
-  const taskHeight =
-    taskRef.current && taskRef.current.offsetHeight > 300
-      ? taskRef.current.offsetHeight
-      : 300;
 
   const saveDate = () => {
     setTaskDate(selectedDate);
@@ -25,7 +17,12 @@ const AddDate = ({ taskRef, taskDate, setTaskDate }) => {
 
   return (
     <>
-      <Button className="btn_set-date" onClick={() => setOpen(true)} value={taskDate}>
+      <Button
+        className="btn btn_set-date"
+        onClick={() => setOpen(true)}
+        value={taskDate}
+        sx={{ color: 'var(--color-mark)', padding: 0, fontSize: 12}}
+      >
         {taskDate ? taskDate.format('D MMM') : 'set date'}
       </Button>
       <Popover
@@ -38,9 +35,9 @@ const AddDate = ({ taskRef, taskDate, setTaskDate }) => {
           horizontal: 'left',
         }}
       >
-        <Container sx={{ width: taskWidth, height: taskHeight }}>
+        <Container>
           <Calendar
-            calendars={{ amount: 1, main: 1 }}
+            elements={{ amount: 1, main: 1, type: 'month' }}
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
           />

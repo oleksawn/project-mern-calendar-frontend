@@ -1,29 +1,18 @@
 .calendar {
   display: flex;
+  flex-direction: row;
   justify-content: center;
 }
-
-.arrowBtn {
-  background-color: transparent;
-  border: none;
-  outline: none;
-  cursor: pointer;
-} 
-.arrowBtn svg {
-  width: 20px;
-  height: 20px;
-  fill: var(--color-mark);
+.calendar__months-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
-
-.month {
+.calendar__table {
   background-color: var(--color-devide-light);
 }
-.month_caption {
-  font-family: var(--font-mark);
-  color: var(--color-mark);
-}
 
-.day {
+.table__day {
   position: relative;
   margin: 0;
   padding: 0;
@@ -33,24 +22,78 @@
   font-size: 9px;
   font-weight: 500;
 }
-.day:hover {
+.table__day_month-view.table__day_this:hover {
   border: 2px solid var(--color-mark-more);
   cursor: pointer;
 }
-.weekend {
+.table__day_week-view:hover {
+  border: 2px solid var(--color-mark-more);
+  cursor: pointer;
+}
+.table__day_weekend {
   background-color: var(--color-light);
 }
-.today {
+.table__day_today {
   border: 2px solid var(--color-mark);
 }
-.selected {
- background-color: var(--color-mark-secondary);
+.table__day_selected {
+  background-color: var(--color-mark-secondary);
 }
-
-.date {
+.day__date {
   position: absolute;
   margin: 0;
   padding: 0;
   top: -3px;
   right: -2px;
+}
+.table__day_week-view.table__day_next .day__date,
+.table__day_week-view.table__day_prev .day__date {
+  color: var(--color-blue);
+}
+
+.calendar__titles_week_view {
+  width: 49px;
+  text-align: left;
+}
+.month-title {
+  margin: 0;
+  font-family: var(--font-mark);
+}
+.month-title_week-view {
+  color: var(--color-mark-secondary);
+  font-size: 18px;
+}
+.month-title_month-view {
+  color: var(--color-mark);
+  font-size: 16px;
+}
+.year-title {
+  margin: 0;
+  font-family: var(--font-mark);
+  font-size: 16px;
+  color: var(--color-mark-secondary);
+}
+
+.calendar__controls_week-view {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 0 4px;
+  width: 56px;
+}
+.controls__arrowBtn {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0;
+}
+.controls__arrowBtn svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--color-mark);
+}
+.controls__arrowBtn_week-view {
+  transform: scale(1.2) rotate(90deg);
 }
