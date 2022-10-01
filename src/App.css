@@ -6,7 +6,6 @@
   margin: 0 auto;
   position: relative;
   display: grid;
-  height: 100vh;
   overflow: hidden;
  
   grid-template-columns: 18px auto;
@@ -24,18 +23,16 @@
 .calendar_container {
   grid-area: calendar;
   overflow: auto;
-  
 }
 .main_container {
   min-width: 400px;
   grid-area: main;
   position: relative;
   padding: 0;
-  height: calc(100vh - 294px);
   overflow: hidden;
 }
 .main_wrapper {
-  height: calc(100% - 68px);
+  height: calc(100% - 60px);
   overflow: auto;
 }
 .dated_container {
@@ -54,9 +51,6 @@
     .dated_container {
       min-width: 350px;
       overflow: auto;
-    }
-    .main_container {
-      height: calc(100vh - 180px);
     }
 }
 

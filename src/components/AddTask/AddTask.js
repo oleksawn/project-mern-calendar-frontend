@@ -6,7 +6,6 @@ import { FormGroup, Input, Button } from '@mui/material';
 import ErrorModal from '../../common/ErrorModal';
 import AddDate from './AddDate';
 import './AddTask.css';
-import shadows from '@mui/material/styles/shadows';
 
 const AddTask = () => {
   const [taskTitle, setTaskTitle] = useState('');

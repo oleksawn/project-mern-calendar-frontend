@@ -8,7 +8,7 @@ const MainView = ({ dateForView }) => {
       <div className="main_wrapper">
         <Tasks />
       </div>
-      <AddTask />;
+      <AddTask />
     </div>
   );
 };

@@ -26,7 +26,7 @@ function App() {
   }, [dateForView]);
 
   return (
-    <div className="grid_container">
+    <div className="grid_container" style={{height: window.innerHeight}}>
       <Spheres dateForView={dateForView} windowSize={windowSize.window} />
       <DatePicker dateForView={dateForView} setDateForView={setDateForView} />
       <Dated dateForView={dateForView} />
