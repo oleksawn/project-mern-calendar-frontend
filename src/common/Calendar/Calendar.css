@@ -87,13 +87,17 @@
   border: none;
   outline: none;
   cursor: pointer;
-  padding: 0;
 }
 .controls__arrowBtn svg {
-  width: 20px;
-  height: 20px;
+  width: 30px;
   fill: var(--color-mark);
 }
+.controls__arrowBtn_next {
+  margin: 0px 0 0 -12px;
+}
+.controls__arrowBtn_prev {
+  margin: 0 0 -8px -12px;
+}
 .controls__arrowBtn_week-view {
-  transform: scale(1.2) rotate(90deg);
+  transform: rotate(90deg);
 }

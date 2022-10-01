@@ -1,4 +1,5 @@
-import { ReactSVG } from 'react-svg';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const Control = ({ type, elementType, shownDate, setShownDate, view }) => {
   const handleControl = () => {
@@ -20,11 +21,7 @@ const Control = ({ type, elementType, shownDate, setShownDate, view }) => {
 
   return (
     <button className={classes.join(' ')} onClick={handleControl}>
-      {type === 'prev' ? (
-        <ReactSVG src="/left-arr.svg" />
-      ) : (
-        <ReactSVG src="/right-arr.svg" />
-      )}
+      {type === 'prev' ? <ArrowBackIosIcon /> : <ArrowForwardIosIcon />}
     </button>
   );
 };
