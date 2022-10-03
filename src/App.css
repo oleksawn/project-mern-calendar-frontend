@@ -9,7 +9,7 @@
   overflow: hidden;
  
   grid-template-columns: 18px auto;
-  grid-auto-rows: 94px 200px auto;
+  grid-auto-rows: 81px 200px auto;
   
   grid-template-areas:
     "spheres calendar"
@@ -22,7 +22,9 @@
 
 .calendar_container {
   grid-area: calendar;
-  overflow: auto;
+  overflow: hidden;
+  box-shadow: 0 1px 10px 0 var(--color-gray);
+  z-index: 3;
 }
 .main_container {
   min-width: 400px;
@@ -38,15 +40,22 @@
 .dated_container {
   grid-area: dated;
   overflow: auto;
+  box-shadow: -1px 1px 10px 0 var(--color-gray);
+  z-index: 2;
 }
 
 @media screen and (min-width: 900px) {
     .grid_container {
       grid-template-columns: 18px 5fr 2fr;
-      grid-auto-rows: 180px auto;
+      grid-auto-rows: 176px auto;
       grid-template-areas:
         "spheres calendar dated"
         "spheres main dated"
+    }
+    .calendar_container {
+      grid-area: calendar;
+      overflow: hidden;
+      box-shadow: 0 1px 40px 0px var(--color-gray);
     }
     .dated_container {
       min-width: 350px;

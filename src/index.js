@@ -6,12 +6,18 @@ import '@fontsource/roboto';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './redux/store';
+import {appTheme} from './app-theme';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+const theme = createTheme(appTheme);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
     <React.StrictMode>
-      <App />
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
     </React.StrictMode>
   </Provider>
 );

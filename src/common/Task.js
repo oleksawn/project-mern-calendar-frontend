@@ -33,7 +33,10 @@ export default function Task({ task }) {
         />
         <Button onClick={handleDeleteButton}>delete</Button>
         <Typography sx={{ fontSize: 16 }} color="text.secondary">
-          {task.title} {task.date && dayjs(task.date).format('D MMM')}
+          {task.title}
+          {task.date && dayjs(task.date).format('DD MMM')}
+          {task.time && dayjs(task.date).format('HH:mm')}
+          {task.time && console.log(task.title, task.date)}
         </Typography>
       </CardContent>
     </Card>

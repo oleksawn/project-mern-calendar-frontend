@@ -1,15 +1,19 @@
 import AddTask from '../AddTask/AddTask'
-import Tasks from '../../common/Tasks/Tasks';
+import TimeView from '../../common/TimeView/TimeView';
+import { Paper } from '@mui/material';
 
 const MainView = ({ dateForView }) => {
 
   return (
-    <div className="main_container container">
+    <Paper
+      className="main_container container"
+      sx={{ backgroundColor: 'block.white', boxSizing: 'border-box' }}
+    >
       <div className="main_wrapper">
-        <Tasks />
+        <TimeView dateForView={dateForView} />
       </div>
       <AddTask />
-    </div>
+    </Paper>
   );
 };
 export default MainView;

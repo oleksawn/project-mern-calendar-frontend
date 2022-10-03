@@ -1,3 +1,4 @@
+import { Paper } from '@mui/material';
 import React, { useRef } from 'react';
 import Calendar from '../../common/Calendar/Calendar';
 import useResize from '../../hooks/useResize';
@@ -16,7 +17,7 @@ const DatePicker = ({ dateForView, setDateForView }) => {
     : Math.floor(pickerWidth / CALENDAR_SIZE.width);
 
   return (
-    <div className="calendar_container container" ref={pickerRef}>
+    <Paper className="calendar_container container" ref={pickerRef} sx={{backgroundColor: 'block.dark'}}>
       <Calendar
         blockSize={{ width: CALENDAR_SIZE.width, height: CALENDAR_SIZE.height }}
         elements={{
@@ -28,7 +29,7 @@ const DatePicker = ({ dateForView, setDateForView }) => {
         selectedDate={dateForView}
         setSelectedDate={setDateForView}
       />
-    </div>
+    </Paper>
   );
 };
 export default DatePicker;

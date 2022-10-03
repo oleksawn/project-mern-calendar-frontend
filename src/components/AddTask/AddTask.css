@@ -4,7 +4,8 @@
   left: 0;
   width: 95%;
   padding-left: 5%;
-  background-color: var(--color-blue-light);
+  background-color: var(--color-white);
+  box-shadow: 0 -1px 10px 0 var(--color-gray);
 }
 
 .btn_set-date {

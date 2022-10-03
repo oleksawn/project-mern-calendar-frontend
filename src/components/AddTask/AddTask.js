@@ -4,12 +4,13 @@ import { postTaskAndRenew } from '../../thunks/thunk-task';
 import dayjs from 'dayjs';
 import { FormGroup, Input, Button } from '@mui/material';
 import ErrorModal from '../../common/ErrorModal';
-import AddDate from './AddDate';
+import AddDateAndTime from './components/AddDateAndTime';
 import './AddTask.css';
 
 const AddTask = () => {
   const [taskTitle, setTaskTitle] = useState('');
   const [taskDate, setTaskDate] = useState(dayjs());
+  const [taskTime, setTaskTime] = useState({ hours: null, minutes: null });
   const { errorTask } = useSelector((state) => state.task) || [];
   const taskRef = useRef();
   const dispatch = useDispatch();
@@ -18,23 +19,44 @@ const AddTask = () => {
     setTaskTitle(e.target.value);
   };
 
+  const hasTime = (time) => {
+    if (taskTime.hours && taskTime.minutes) return true;
+    else return false;
+  };
   const handleTaskSubmit = () => {
+    console.log(
+      'task submit ',
+      taskDate,
+      taskTime,
+      hasTime
+        ? taskDate.hour(taskTime.hours).minute(taskTime.minutes)
+        : 'no time'
+    );
     dispatch(
-      postTaskAndRenew({ title: taskTitle, status: false, date: taskDate })
+      postTaskAndRenew({
+        title: taskTitle,
+        status: false,
+        date: hasTime
+          ? taskDate.hour(taskTime.hours).minute(taskTime.minutes)
+          : taskDate,
+        time: hasTime ? true : false,
+      })
     );
     setTaskTitle('');
     setTaskDate(dayjs());
+    setTaskTime({ hours: null, minutes: null });
   };
 
   return (
     <div ref={taskRef} className="task_add">
-      {console.log('add task after', taskDate)}
       {Object.keys(errorTask).length === 0 ? (
         <FormGroup>
-          <AddDate
+          <AddDateAndTime
             taskRef={taskRef}
             taskDate={taskDate}
             setTaskDate={setTaskDate}
+            taskTime={taskTime}
+            setTaskTime={setTaskTime}
           />
           <Input
             className="input_task-title"
@@ -55,8 +77,8 @@ const AddTask = () => {
               border: '1px solid var(--color-devide-light)',
               '&:hover': {
                 border: '1px solid var(--color-mark-secondary)',
-                boxShadow: '10px 10px 10px red'
-              }
+                boxShadow: '10px 10px 10px red',
+              },
             }}
             variant="outlined"
             onClick={handleTaskSubmit}

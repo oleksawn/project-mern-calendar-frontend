@@ -5,6 +5,7 @@ import InlineMenuDrawer from '../../common/Drawer/InlineMenuDrawer';
 import SpheresMenu from './SpheresMenu';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import { Paper } from '@mui/material';
 
 const spheres = [
   { title: 'sources', color: '#5cc5ef' },
@@ -27,7 +28,7 @@ const Spheres = ({ windowSize, dateForView }) => {
   const menuWidth = 18;
 
   return (
-    <div className="spheres_container">
+    <Paper className="spheres_container" sx={{ backgroundColor: 'block.dark' }}>
       {LARGE_WINDOW ? (
         <InlineMenuDrawer
           size={{ height: HEIGHT }}
@@ -92,7 +93,7 @@ const Spheres = ({ windowSize, dateForView }) => {
           </IconButton>
         </>
       )}
-    </div>
+    </Paper>
   );
 };
 export default Spheres;

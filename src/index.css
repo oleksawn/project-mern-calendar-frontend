@@ -15,6 +15,7 @@
   --color-white: #fcfdfe;
   --color-blue: #5cc5ef;
   --color-blue-light: #f5fcff;
+  --color-gray: rgba(193, 193, 193, 0.7);
 }
 
 :root {

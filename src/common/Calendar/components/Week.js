@@ -1,6 +1,5 @@
 import { createRowCells } from './helpers';
 import Day from './Day';
-import dayjs from 'dayjs';
 
 const Week = ({
   selectedDate,
