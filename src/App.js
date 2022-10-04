@@ -14,17 +14,13 @@ import './App.css';
 import { CssBaseline } from '@mui/material';
 
 function App() {
-  const [dateForView, setDateForView] = useState(dayjs());
+  const [dateForView, setDateForView] = useState({date: dayjs(), view: 'day'});
   const windowSize = useResize();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getTasks());
   }, [dispatch]);
-
-  useEffect(() => {
-    console.log('app after dateForView change');
-  }, [dateForView]);
 
   return (
     <div className="grid_container" style={{ height: window.innerHeight }}>

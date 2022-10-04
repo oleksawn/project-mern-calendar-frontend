@@ -9,7 +9,6 @@ export default function ErrorModal({ errorTask, anchor }) {
   const dispatch = useDispatch();
 
   const handleChange = (event) => {
-    console.log('close!', event.target);
     dispatch(deleteErrorTask());
   };
 

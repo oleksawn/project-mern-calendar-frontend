@@ -1,23 +1,28 @@
-import {createHoursCells} from './components/helpers';
+import { createHoursCells } from './components/helpers';
 import Hour from './components/Hour';
+import dayjs from 'dayjs';
 
-const TimeView = ({ dateForView }) => {
-  console.log('time view!', dateForView);
+const TimeView = ({ date, tasks }) => {
   const hoursCells = createHoursCells();
+
+  const filterTasksByHour = (tasks, hour) => {
+    return tasks.filter((task) => {
+      return dayjs(task.date).hour() == hour;
+    });
+  };
+
   return (
     <div>
-      <h3>date for time view: {dateForView.format('DD MMM HH:mm')}</h3>
       <div
         className="timelog-hours"
         style={{
           display: 'flex',
           flexDirection: 'column',
           margin: 2,
-          border: '1px solid black'
         }}
       >
         {hoursCells.map(({ hours }, i) => (
-          <Hour hour={hours} />
+          <Hour hour={hours} key={i} tasks={filterTasksByHour(tasks, hours)} />
         ))}
       </div>
     </div>

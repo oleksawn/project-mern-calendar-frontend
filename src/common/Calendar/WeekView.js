@@ -13,7 +13,7 @@ export default function WeekView({
   const [shownDate, setShownDate] = useState(
     fromSunday
       ? selectedDate.startOf('week')
-      : startOfWeekHandleSunday(selectedDate)
+      : startOfWeekHandleSunday(selectedDate.date)
   );
   return (
     <div className="calendar" style={{ height: tableSize.height }}>

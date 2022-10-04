@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { postTaskAndRenew } from '../../thunks/thunk-task';
 import dayjs from 'dayjs';
@@ -9,8 +9,7 @@ import './AddTask.css';
 
 const AddTask = () => {
   const [taskTitle, setTaskTitle] = useState('');
-  const [taskDate, setTaskDate] = useState(dayjs());
-  const [taskTime, setTaskTime] = useState({ hours: null, minutes: null });
+  const [taskDate, setTaskDate] = useState({ date: dayjs(), view: 'day' });
   const { errorTask } = useSelector((state) => state.task) || [];
   const taskRef = useRef();
   const dispatch = useDispatch();
@@ -19,33 +18,20 @@ const AddTask = () => {
     setTaskTitle(e.target.value);
   };
 
-  const hasTime = (time) => {
-    if (taskTime.hours && taskTime.minutes) return true;
-    else return false;
-  };
   const handleTaskSubmit = () => {
-    console.log(
-      'task submit ',
-      taskDate,
-      taskTime,
-      hasTime
-        ? taskDate.hour(taskTime.hours).minute(taskTime.minutes)
-        : 'no time'
-    );
     dispatch(
       postTaskAndRenew({
         title: taskTitle,
         status: false,
-        date: hasTime
-          ? taskDate.hour(taskTime.hours).minute(taskTime.minutes)
-          : taskDate,
-        time: hasTime ? true : false,
+        date: taskDate.date,
+        type: taskDate.view,
       })
     );
     setTaskTitle('');
-    setTaskDate(dayjs());
-    setTaskTime({ hours: null, minutes: null });
+    setTaskDate({ date: dayjs(), view: 'day' });
   };
+
+  // console.log('1. add task (task date) - ', taskDate);
 
   return (
     <div ref={taskRef} className="task_add">
@@ -55,8 +41,6 @@ const AddTask = () => {
             taskRef={taskRef}
             taskDate={taskDate}
             setTaskDate={setTaskDate}
-            taskTime={taskTime}
-            setTaskTime={setTaskTime}
           />
           <Input
             className="input_task-title"

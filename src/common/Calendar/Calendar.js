@@ -13,14 +13,13 @@ const createElements = (amount, main) => {
 };
 
 export default function Calendar({
-  blockSize = {width: 280, height: 160},
-  elements = {type: 'month', amount: 1, main: 1, },
+  blockSize = { width: 280, height: 160 },
+  elements = { type: 'month', amount: 1, main: 1 },
   fromSunday = false,
   selectedDate,
   setSelectedDate,
 }) {
   const elementsArr = createElements(elements.amount, elements.main);
-
   return (
     <>
       {elements.type === 'month' && (

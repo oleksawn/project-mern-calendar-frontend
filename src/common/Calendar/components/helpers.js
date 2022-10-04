@@ -17,7 +17,7 @@ export const createMonthRows = (date, fromSunday) => {
   const startOfWeek = fromSunday
     ? date.startOf('month').startOf('week')
     : startOfWeekHandleSunday(date.startOf('month'));
-
+  //console.log('1111111 ', date, date.startOf('month'));
   for (let i = 0; i < weeksAmount; i++) {
     rows.push({
       startOfWeek: startOfWeek.add(i * 7, 'day'),

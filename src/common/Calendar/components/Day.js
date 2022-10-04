@@ -21,12 +21,12 @@ const addClasses = (type, date, selectedDate, view) => {
 
 const Day = ({ type, date, selectedDate, setSelectedDate, view }) => {
   const handleSelect = () => {
-    if (date) setSelectedDate(date);
+    if (date) setSelectedDate({ date: date, view: 'day' });
   };
 
   return (
     <td
-      className={addClasses(type, date, selectedDate, view)}
+      className={addClasses(type, date, selectedDate.date, view)}
       data-date={date}
       onClick={handleSelect}
     >

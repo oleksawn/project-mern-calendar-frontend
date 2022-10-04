@@ -1,15 +1,30 @@
-import Cell from './components/Cell';
-import {useState} from 'react';
+import { useEffect, useState } from 'react';
+import dayjs from 'dayjs';
 import { createHoursCells, createMinutesCells } from './components/helpers';
+import Cell from './components/Cell';
 
-export default function Clock({ selectedTime, setSelectedTime }) {
-  const [time, setTime] = useState(selectedTime);
+export default function Clock({ selectedDate, setSelectedDate }) {
+  const [time, setTime] = useState({
+    hours: selectedDate.view === 'day' ? null : dayjs(selectedDate.date).hour(),
+    minutes:
+      selectedDate.view === 'day' ? null : dayjs(selectedDate.date).minute(),
+  });
   const hoursCells = createHoursCells();
   const minutesCells = createMinutesCells();
+
   const handleClick = (type, value) => {
-    setTime({...time, [type]: value});
-    setSelectedTime({ ...time, [type]: value });
-  }
+    setTime({ ...time, [type]: value });
+  };
+
+  useEffect(() => {
+    if (time.hours !== null && time.minutes !== null) {
+      setSelectedDate({
+        date: dayjs(selectedDate.date).hour(time.hours).minute(time.minutes),
+        view: 'time',
+      });
+    }
+  }, [time.hours, time.minutes]);
+
   return (
     <div
       className="clock"

@@ -8,7 +8,7 @@ export default function MonthView({
   selectedDate,
   setSelectedDate,
 }) {
-  const [shownDate, setShownDate] = useState(selectedDate.date(1));
+  const [shownDate, setShownDate] = useState(selectedDate.date.date(1));
   return (
     <div className="calendar">
       <Control
@@ -26,7 +26,7 @@ export default function MonthView({
             shownDate={shownDate.add(shownElementShift, 'month')}
             fromSunday={false}
             setSelectedDate={setSelectedDate}
-            view='month'
+            view="month"
           />
         ))}
       </div>

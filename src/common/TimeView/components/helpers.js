@@ -8,7 +8,7 @@ export const createHoursCells = () => {
 
 export const createMinutesCells = () => {
   const cells = [];
-  for (let i = 0; i < 60; i++) {
+  for (let i = 0; i < 60; i+=15) {
     cells.push({ minutes: i });
   }
   return cells;

@@ -11,7 +11,6 @@ export default function Month({
   view
 }) {
   const rows = createMonthRows(shownDate, fromSunday);
-
   return (
     <table
       className="calendar__table table"
