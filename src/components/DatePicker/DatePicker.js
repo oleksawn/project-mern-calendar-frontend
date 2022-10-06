@@ -9,11 +9,11 @@ const DatePicker = ({ dateForView, setDateForView }) => {
   const [SMALL_WINDOW] = size.window;
   const pickerWidth = pickerRef.current && pickerRef.current.clientWidth;
   const CALENDAR_SIZE = SMALL_WINDOW
-    ? { width: 280, height: 80 }
+    ? { width: 340, height: 80 }
     : { width: 300, height: 160 };
   const CALENDAR_TYPE = SMALL_WINDOW ? 'week' : 'month';
   const CALENDARS_AMOUNT = SMALL_WINDOW
-    ? 3
+    ? 2
     : Math.floor(pickerWidth / CALENDAR_SIZE.width);
 
   return (

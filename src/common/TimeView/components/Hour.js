@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 var isBetween = require('dayjs/plugin/isBetween');
 dayjs.extend(isBetween);
 
-const Hour = ({ hour, tasks }) => {
+const Hour = ({ hour, tasks, setTopZIndex, topZIndex }) => {
   const minutesCells = createMinutesCells();
 
   const filterTasksByMinute = (tasks, minute) => {
@@ -28,14 +28,21 @@ const Hour = ({ hour, tasks }) => {
   return (
     <div
       className="timelog-hour"
-      style={{ display: 'flex', border: '1px solid black' }}
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        backgroundColor: hour >= 0 && hour < 8 ? '#e1eaf9' : '#f5f5f5',
+        borderRadius: '8px',
+        borderBottom: '2px solid #e0e4e7',
+      }}
     >
-      <div style={{ width: 20 }}>{hour}</div>
+      <div style={{ width: 20, borderRight: '1px solid #e0e4e7' }}>{hour}</div>
       <div
         className="timelog-minutes"
         style={{
           display: 'flex',
           flexDirection: 'column',
+          width: '100%',
         }}
       >
         {minutesCells.map(({ minutes }, i) => (
@@ -43,6 +50,8 @@ const Hour = ({ hour, tasks }) => {
             minute={minutes}
             key={i}
             tasks={filterTasksByMinute(tasks, minutes)}
+            setTopZIndex={setTopZIndex}
+            topZIndex={topZIndex}
           />
         ))}
       </div>

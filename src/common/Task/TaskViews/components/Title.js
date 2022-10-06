@@ -2,7 +2,7 @@ import { Stack, Typography, Checkbox } from '@mui/material';
 
 const Title = ({ task, status, handleStatusChange }) => {
   return (
-    <Stack direction="row" sx={{ width: '100%' }}>
+    <Stack direction="row" sx={{ width: '100%', alignItems: 'flex-start' }}>
       <Checkbox
         checked={status}
         onChange={handleStatusChange}

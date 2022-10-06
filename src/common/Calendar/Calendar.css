@@ -10,16 +10,18 @@
   justify-content: center;
 }
 .calendar__table {
-  background-color: var(--color-devide-light);
+  /* background-color: var(--color-devide-light); */
+  background-color: var(--color-calendar-bg);
+  border-spacing: 3px;
 }
 
 .table__day {
   position: relative;
-  margin: 0;
+  margin: 10px;
   padding: 0;
   background-color: var(--color-white);
   border: 2px solid transparent;
-  border-radius: 3px;
+  border-radius: 5px;
   font-size: 9px;
   font-weight: 500;
 }
@@ -46,6 +48,8 @@
   padding: 0;
   top: -3px;
   right: -2px;
+  font-family: 'Roboto';
+  font-weight: 600;
 }
 .table__day_week-view.table__day_next .day__date,
 .table__day_week-view.table__day_prev .day__date {
@@ -59,6 +63,7 @@
 .month-title {
   margin: 0;
   font-family: var(--font-mark);
+  line-height: 1.3rem;
 }
 .month-title_week-view {
   color: var(--color-mark-secondary);
@@ -69,10 +74,11 @@
   font-size: 16px;
 }
 .year-title {
-  margin: 0;
+  margin: -5px 0;
   font-family: var(--font-mark);
   font-size: 16px;
   color: var(--color-mark-secondary);
+  line-height: 1.1rem;
 }
 
 .calendar__controls_week-view {
@@ -81,7 +87,8 @@
   justify-content: space-between;
   align-items: flex-start;
   margin: 0 4px;
-  width: 56px;
+  width: 46px;
+  height: 80px;
 }
 .controls__arrowBtn {
   background-color: transparent;
@@ -91,13 +98,17 @@
 }
 .controls__arrowBtn svg {
   width: 30px;
-  fill: var(--color-mark);
+  fill: var(--color-mark-more);
 }
 .controls__arrowBtn_next {
-  margin: 0px 0 0 -12px;
+  margin: 0;
+  margin-left: -12px;
+  margin-top: 4px;
 }
 .controls__arrowBtn_prev {
-  margin: 0 0 -8px -12px;
+  margin: 0;
+  margin-left: -12px;
+  margin-bottom: -7px;
 }
 .controls__arrowBtn_week-view {
   transform: rotate(90deg);

@@ -1,9 +1,11 @@
+import {useState} from 'react';
 import { createHoursCells } from './components/helpers';
 import Hour from './components/Hour';
 import dayjs from 'dayjs';
 
 const TimeView = ({ tasks }) => {
   const hoursCells = createHoursCells();
+  const [topZIndex, setTopZIndex] = useState(100);
 
   const filterTasksByHour = (tasks, hour) => {
     return tasks.filter((task) => {
@@ -27,7 +29,13 @@ const TimeView = ({ tasks }) => {
         }}
       >
         {hoursCells.map(({ hours }, i) => (
-          <Hour hour={hours} key={i} tasks={filterTasksByHour(tasks, hours)} />
+          <Hour
+            hour={hours}
+            key={i}
+            tasks={filterTasksByHour(tasks, hours)}
+            setTopZIndex={setTopZIndex}
+            topZIndex={topZIndex}
+          />
         ))}
       </div>
     </div>

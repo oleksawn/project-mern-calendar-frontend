@@ -9,13 +9,14 @@ export const appTheme = {
     },
     block: {
       light: '#fcfdfe',
-      dark: '#f1f5f9',
+      dark: '#f9f9f9',
     },
     spheres: {
       default: {
         main: '#a3a599',
       },
     },
+    blue: '#' ,
     task: {
       mainBg: '#fff',
       divider: '#e0e4e7',
@@ -25,9 +26,6 @@ export const appTheme = {
     },
   },
   typography: {
-    main: 'blue',
-    block: 'red',
-    header: 'green',
     icon: {
       fontFamily: 'Roboto',
       fontWeight: 600,

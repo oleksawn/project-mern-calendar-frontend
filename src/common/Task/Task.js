@@ -6,8 +6,9 @@ import {
 } from '../../thunks/thunk-task';
 import Dated from './TaskViews/Dated';
 import Spheres from './TaskViews/Spheres';
+import Timeline from './TaskViews/Timeline';
 
-export default function Task({ task, block, dateForView }) {
+export default function Task({ task, block, dateForView, handleClick }) {
   const [status, setStatus] = useState(task.status);
   const dispatch = useDispatch();
 
@@ -31,6 +32,16 @@ export default function Task({ task, block, dateForView }) {
           handleStatusChange={handleStatusChange}
           handleDeleteButton={handleDeleteButton}
           dateForView={dateForView}
+        />
+      )}
+      {block === 'timeline' && (
+        <Timeline
+          task={task}
+          status={status}
+          handleStatusChange={handleStatusChange}
+          handleDeleteButton={handleDeleteButton}
+          dateForView={dateForView}
+          handleClick={handleClick}
         />
       )}
       {block === 'spheres' && (

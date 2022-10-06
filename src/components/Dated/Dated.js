@@ -30,15 +30,26 @@ const Dated = ({ dateForView }) => {
   return (
     <Paper
       className="layout__dated-container"
-      sx={{ backgroundColor: 'block.dark' }}
+      sx={{ backgroundColor: 'block.dark', position: 'relative' }}
     >
-      {status === 'loading' && <CircularProgress />}
+      {status === 'loading' && (
+        <CircularProgress
+          sx={{ position: 'absolute', zIndex: 50, top: '30%', left: '42%' }}
+        />
+      )}
       {error && <p>{error.message}</p>}
 
       {dateForView.view === 'day' &&
         getDayTasks().length > 0 &&
         getDayTasks().map((task) => {
-          return <Task task={task} key={task._id} block="dated" dateForView={dateForView}/>;
+          return (
+            <Task
+              task={task}
+              key={task._id}
+              block="dated"
+              dateForView={dateForView}
+            />
+          );
         })}
     </Paper>
   );

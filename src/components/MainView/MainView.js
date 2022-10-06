@@ -3,9 +3,11 @@ import TimeView from '../../common/TimeView/TimeView';
 import { useSelector } from 'react-redux';
 import dayjs from 'dayjs';
 import { Paper } from '@mui/material';
+import { useState } from 'react';
 
 const MainView = ({ dateForView }) => {
   const { tasks, error, status } = useSelector((state) => state.tasks) || [];
+
   const getTimedTasksForDate = () => {
     return tasks.filter((task) => {
       if (task.date.inside === false) {

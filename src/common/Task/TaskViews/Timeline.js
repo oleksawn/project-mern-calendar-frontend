@@ -8,19 +8,20 @@ import {
   Stack,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Date from './components/Date';
+import Time from './components/Time';
 import Sphere from './components/Sphere';
 import Urgency from './components/Urgency';
 import Title from './components/Title';
 import Buttons from './components/Buttons';
 import Description from './components/Description';
 
-const Dated = ({
+const Timeline = ({
   task,
   status,
   handleStatusChange,
   handleDeleteButton,
   dateForView,
+  handleClick
 }) => {
   const [expanded, setExpanded] = useState(false);
   return (
@@ -28,23 +29,25 @@ const Dated = ({
       expanded={expanded}
       onChange={() => setExpanded(!expanded)}
       sx={{
-        margin: '6px 6px',
-        marginLeft: '20px',
+        margin: '0',
+        marginLeft: '6px',
         padding: '1px',
-        borderRight: 24,
+        borderRight: 20,
         borderColor: 'spheres.default.main',
       }}
       disableGutters
+      onClick={handleClick}
     >
       <AccordionActions
         sx={{
           padding: '0px',
+          position: 'relative'
         }}
       >
         <Stack direction="row" sx={{ width: '100%' }}>
           <Stack
             sx={{
-              width: '30px',
+              width: '20px',
               alignItems: 'center',
               justifyContent: 'center',
               borderRight: 2,
@@ -66,7 +69,7 @@ const Dated = ({
                 justifyContent: 'space-between',
               }}
             >
-              <Date task={task} />
+              <Time task={task} />
               <Sphere task={task} />
             </Stack>
 
@@ -83,8 +86,9 @@ const Dated = ({
           sx={{
             padding: '0px',
             alignItems: 'flex-end',
-            position: 'relative',
-            right: '-25px',
+            position: 'absolute',
+            bottom: 0,
+            right: '-23px'
           }}
         ></AccordionSummary>
       </AccordionActions>
@@ -101,7 +105,7 @@ const Dated = ({
             sx={{
               width: '100%',
               justifyContent: 'space-between',
-              paddingLeft: '30px',
+              paddingLeft: '20px',
             }}
           >
             <Description task={task} />
@@ -112,4 +116,4 @@ const Dated = ({
     </Accordion>
   );
 };
-export default Dated;
+export default Timeline;
