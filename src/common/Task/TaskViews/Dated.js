@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import dayjs from 'dayjs';
 import {
   Accordion,
   AccordionActions,
@@ -7,14 +6,14 @@ import {
   AccordionSummary,
   Box,
   Stack,
-  Typography,
-  Checkbox,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import StarBorderIcon from '@mui/icons-material/StarBorder';
-import FolderOpenIcon from '@mui/icons-material/FolderOpen';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import Date from './components/Date';
+import Sphere from './components/Sphere';
+import Urgency from './components/Urgency';
+import Title from './components/Title';
+import Buttons from './components/Buttons';
+import Description from './components/Description';
 
 const Dated = ({
   task,
@@ -53,9 +52,7 @@ const Dated = ({
               marginRight: '2px',
             }}
           >
-            {/* <StarBorderIcon sx={{
-                  color: 'spheres.default.main',
-                }}/> */}
+            <Urgency task={task}/>
           </Stack>
 
           <Stack
@@ -71,40 +68,18 @@ const Dated = ({
                 justifyContent: 'space-between',
               }}
             >
-              <Stack direction="row" sx={{ marginLeft: '3px' }}>
-                <CalendarMonthIcon
-                  sx={{ color: 'spheres.default.main', fontSize: 'large' }}
-                />
-                <Typography variant="icon" color="task.icon">
-                  {task.date.dates.length === 1 &&
-                    dayjs(task.date.dates[0].date).format('DD MMM')}
-                </Typography>
-              </Stack>
 
-              <Stack direction="row">
-                <FolderOpenIcon
-                  sx={{ color: 'spheres.default.main', fontSize: 'large' }}
-                />
-                <Typography variant="icon" color="task.icon">
-                  {task.parents ? task.parents : 'Unspecified'}
-                </Typography>
-              </Stack>
+              <Date task={task} />
+              <Sphere task={task} />
+
             </Stack>
 
-            <Stack direction="row" sx={{ width: '100%' }}>
-              <Checkbox
-                checked={status}
-                onChange={handleStatusChange}
-                inputProps={{ 'aria-label': 'controlled' }}
-                sx={{
-                  padding: 0,
-                  color: 'spheres.default.main',
-                }}
-              />
-              <Typography variant="title" color="task.text">
-                {task.title}
-              </Typography>
-            </Stack>
+            <Title
+              task={task}
+              status={status}
+              handleStatusChange={handleStatusChange}
+            />
+
           </Stack>
         </Stack>
 
@@ -141,19 +116,10 @@ const Dated = ({
               borderColor: 'spheres.default.main',
             }}
           >
-            <Typography color="task.text">
-              {task.description && task.description}
-            </Typography>
-            <Stack direction="row">
-              <DeleteOutlineIcon
-                onClick={handleDeleteButton}
-                sx={{
-                  cursor: 'pointer',
-                  margin: '0 6px',
-                  color: 'spheres.default.main',
-                }}
-              />
-            </Stack>
+
+            <Description task={task} />
+            <Buttons task={task} handleDeleteButton={handleDeleteButton} />
+
           </Stack>
         </Stack>
       </AccordionDetails>
