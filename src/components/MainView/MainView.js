@@ -6,16 +6,22 @@ import { Paper } from '@mui/material';
 
 const MainView = ({ dateForView }) => {
   const { tasks, error, status } = useSelector((state) => state.tasks) || [];
-
-  let detailedTasks = [];
-  if (dateForView.view === 'day') {
-    detailedTasks = tasks.filter((task) => {
-      if (task.type === 'time') {
-        return task.date && dayjs(task.date).isSame(dateForView.date, 'day');
+  const getTimedTasksForDate = () => {
+    return tasks.filter((task) => {
+      if (task.date.inside === false) {
+        for (let i = 0; i < task.date.dates.length; i++) {
+          if (
+            task.date.dates[i].time &&
+            dayjs(task.date.dates[i].date).isSame(dateForView.date, 'day')
+          ) {
+            return true;
+          }
+        }
       }
+      return false;
     });
-  }
-  // console.log('main tasks ', dateForView.view, dateForView.date, detailedTasks);
+    // console.log('main: timed tasks for date ', timedTasks);
+  };
 
   return (
     <Paper
@@ -24,12 +30,11 @@ const MainView = ({ dateForView }) => {
     >
       <div className="main_wrapper">
         {dateForView.view === 'day' && (
-          <TimeView date={dateForView.date} tasks={detailedTasks} />
+          <TimeView date={dateForView.date} tasks={getTimedTasksForDate()} />
         )}
       </div>
 
       <AddTask />
-
     </Paper>
   );
 };

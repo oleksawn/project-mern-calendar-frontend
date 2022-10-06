@@ -1,21 +1,27 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux/es/exports';
+import dayjs from 'dayjs';
+
+import { Paper } from '@mui/material';
 import PopMenuDrawer from '../../common/Drawer/PopMenuDrawer';
-import Tasks from '../../common/Tasks/Tasks';
 import InlineMenuDrawer from '../../common/Drawer/InlineMenuDrawer';
 import SpheresMenu from './SpheresMenu';
+import Task from '../../common/Task/Task';
+
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Paper } from '@mui/material';
+import { CircularProgress } from '@mui/material';
 
 const spheres = [
   { title: 'sources', color: '#5cc5ef' },
   { title: 'health', color: '#bbcf4a' },
   { title: 'people', color: '#ffb745' },
   { title: 'adore', color: '#fe7a47' },
-  { title: 'no', color: '#a3a599' },
+  { title: 'default', color: '#a3a599' },
 ];
 
 const Spheres = ({ windowSize, dateForView }) => {
+  const { tasks, error, status } = useSelector((state) => state.tasks) || [];
   const [, , LARGE_WINDOW, HEIGHT] = windowSize;
   const [open, setOpen] = useState(false);
   const handleDrawerOpen = () => {
@@ -45,7 +51,12 @@ const Spheres = ({ windowSize, dateForView }) => {
             );
           }}
         >
-          <Tasks />
+          {status === 'loading' && <CircularProgress />}
+          {error && <p>{error.message}</p>}
+          {tasks.length > 0 &&
+            tasks.map((task) => {
+              return <Task task={task} key={task._id} block="spheres" />;
+            })}
         </InlineMenuDrawer>
       ) : (
         <>
@@ -66,7 +77,12 @@ const Spheres = ({ windowSize, dateForView }) => {
               );
             }}
           >
-            <Tasks />
+            {status === 'loading' && <CircularProgress />}
+            {error && <p>{error.message}</p>}
+            {tasks.length > 0 &&
+              tasks.map((task) => {
+                return <Task task={task} key={task._id} block="spheres" />;
+              })}
           </PopMenuDrawer>
 
           <IconButton

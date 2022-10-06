@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import './index.css';
 import '@fontsource/roboto';
+import '@fontsource/roboto-condensed';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './redux/store';

@@ -26,13 +26,13 @@ const AddDateAndTime = ({ taskRef, taskDate, setTaskDate }) => {
   }, [taskDate.date]);
 
   useEffect(() => {
-    if (selectedTime.view === 'time') {
+    if (selectedTime.time === true) {
       setSelectedTimeDate({
         date: dayjs(selectedDate.date)
           .clone()
           .hour(dayjs(selectedTime.date).hour())
           .minute(dayjs(selectedTime.date).minute()),
-        view: selectedTime.view,
+        time: selectedTime.time,
       });
     } else {
       setSelectedTimeDate(selectedDate);
@@ -46,7 +46,7 @@ const AddDateAndTime = ({ taskRef, taskDate, setTaskDate }) => {
         onClick={() => setOpen(true)}
         sx={{ color: 'var(--color-mark)', padding: 0, fontSize: 12 }}
       >
-        {taskDate.view === 'time'
+        {taskDate.time === true
           ? taskDate.date.format('DD MMM HH:mm')
           : taskDate.date.format('DD MMM')}
       </Button>
@@ -74,7 +74,7 @@ const AddDateAndTime = ({ taskRef, taskDate, setTaskDate }) => {
           </Container>
 
           <Button onClick={saveTimeDate}>OK</Button>
-          {selectedTimeDate.view === 'time'
+          {selectedTimeDate.time === true
             ? selectedTimeDate.date.format('DD MMM HH:mm')
             : selectedTimeDate.date.format('DD MMM')}
         </Container>

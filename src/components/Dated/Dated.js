@@ -6,16 +6,27 @@ import Task from '../../common/Task/Task';
 const Dated = ({ dateForView }) => {
   const { tasks, error, status } = useSelector((state) => state.tasks) || []; // get state from store
 
-  let datedTasks = [];
-  if (dateForView.view === 'day') {
-    datedTasks = tasks.filter((task) => {
+  const getDayTasks = () => {
+    return tasks.filter((task) => {
+      if (task.date.inside === false) {
+        for (let i = 0; i < task.date.dates.length; i++) {
+          if (
+            task.date.dates[i].time === false &&
+            dayjs(task.date.dates[i].date).isSame(dateForView.date, 'day')
+          ) {
+            return true;
+          }
+        }
+        return false;
+      }
+
       if (task.type === 'day') {
         return dayjs(task.date).isSame(dateForView.date, 'day');
       }
     });
-  }
+  };
 
-  // console.log('Dated: view, date, tasks for view ', dateForView.view, dateForView.date, datedTasks);
+  // console.log('Dated: view, date, tasks for view ', dateForView.time, dateForView.date, datedTasks);
   return (
     <Paper
       className="layout__dated-container"
@@ -24,11 +35,11 @@ const Dated = ({ dateForView }) => {
       {status === 'loading' && <CircularProgress />}
       {error && <p>{error.message}</p>}
 
-      {datedTasks.length > 0 &&
-        datedTasks.map((task) => {
-          return <Task task={task} key={task._id} view={dateForView.view} />;
+      {dateForView.view === 'day' &&
+        getDayTasks().length > 0 &&
+        getDayTasks().map((task) => {
+          return <Task task={task} key={task._id} block="dated" dateForView={dateForView}/>;
         })}
-
     </Paper>
   );
 };

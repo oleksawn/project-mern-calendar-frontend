@@ -21,7 +21,7 @@ const addClasses = (type, date, selectedDate, view) => {
 
 const Day = ({ type, date, selectedDate, setSelectedDate, view }) => {
   const handleSelect = () => {
-    if (date) setSelectedDate({ date: date, view: 'day' });
+    if (date) setSelectedDate({ date: date, time: false, view: 'day' });
   };
 
   return (

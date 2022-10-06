@@ -6,16 +6,25 @@ dayjs.extend(isBetween);
 
 const Hour = ({ hour, tasks }) => {
   const minutesCells = createMinutesCells();
+
   const filterTasksByMinute = (tasks, minute) => {
     return tasks.filter((task) => {
-      return dayjs(task.date).isBetween(
-        dayjs(task.date).minute(minute),
-        dayjs(task.date).minute(minute + 15),
-        'minute',
-        '[)'
-      );
+      for (let i = 0; i < task.date.dates.length; i++) {
+        if (
+          dayjs(task.date.dates[i].date).isBetween(
+            dayjs(task.date.dates[i].date).minute(minute),
+            dayjs(task.date.dates[i].date).minute(minute + 15),
+            'minute',
+            '[)'
+          )
+        ) {
+          return true;
+        }
+      }
+      return false;
     });
   };
+
   return (
     <div
       className="timelog-hour"

@@ -7,7 +7,7 @@ import {
 import Dated from './TaskViews/Dated';
 import Spheres from './TaskViews/Spheres';
 
-export default function Task({ task, view }) {
+export default function Task({ task, block, dateForView }) {
   const [status, setStatus] = useState(task.status);
   const dispatch = useDispatch();
 
@@ -24,15 +24,16 @@ export default function Task({ task, view }) {
 
   return (
     <>
-      {view === 'day' && (
+      {block === 'dated' && (
         <Dated
           task={task}
           status={status}
           handleStatusChange={handleStatusChange}
           handleDeleteButton={handleDeleteButton}
+          dateForView={dateForView}
         />
       )}
-      {view === 'spheres' && (
+      {block === 'spheres' && (
         <Spheres
           task={task}
           status={status}

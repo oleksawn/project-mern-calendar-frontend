@@ -5,9 +5,9 @@ import Cell from './components/Cell';
 
 export default function Clock({ selectedDate, setSelectedDate }) {
   const [time, setTime] = useState({
-    hours: selectedDate.view === 'day' ? null : dayjs(selectedDate.date).hour(),
+    hours: selectedDate.time === false ? null : dayjs(selectedDate.date).hour(),
     minutes:
-      selectedDate.view === 'day' ? null : dayjs(selectedDate.date).minute(),
+      selectedDate.time === false ? null : dayjs(selectedDate.date).minute(),
   });
   const hoursCells = createHoursCells();
   const minutesCells = createMinutesCells();
@@ -20,7 +20,7 @@ export default function Clock({ selectedDate, setSelectedDate }) {
     if (time.hours !== null && time.minutes !== null) {
       setSelectedDate({
         date: dayjs(selectedDate.date).hour(time.hours).minute(time.minutes),
-        view: 'time',
+        time: true,
       });
     }
   }, [time.hours, time.minutes]);

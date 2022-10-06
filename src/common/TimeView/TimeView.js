@@ -2,12 +2,17 @@ import { createHoursCells } from './components/helpers';
 import Hour from './components/Hour';
 import dayjs from 'dayjs';
 
-const TimeView = ({ date, tasks }) => {
+const TimeView = ({ tasks }) => {
   const hoursCells = createHoursCells();
 
   const filterTasksByHour = (tasks, hour) => {
     return tasks.filter((task) => {
-      return dayjs(task.date).hour() == hour;
+      for (let i = 0; i < task.date.dates.length; i++) {
+        if (dayjs(task.date.dates[i].date).hour() == hour) {
+          return true;
+        }
+      }
+      return false;
     });
   };
 

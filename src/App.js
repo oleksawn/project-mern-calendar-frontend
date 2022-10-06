@@ -14,7 +14,7 @@ import './App.css';
 import { CssBaseline } from '@mui/material';
 
 function App() {
-  const [dateForView, setDateForView] = useState({date: dayjs(), view: 'day'});
+  const [dateForView, setDateForView] = useState({view: 'day', date: dayjs(), time: false});
   const windowSize = useResize();
   const dispatch = useDispatch();
 

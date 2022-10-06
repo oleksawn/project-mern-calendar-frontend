@@ -9,7 +9,7 @@ import './AddTask.css';
 
 const AddTask = () => {
   const [taskTitle, setTaskTitle] = useState('');
-  const [taskDate, setTaskDate] = useState({ date: dayjs(), view: 'day' });
+  const [taskDate, setTaskDate] = useState({ date: dayjs(), time: false });
   const { errorTask } = useSelector((state) => state.task) || [];
   const taskRef = useRef();
   const dispatch = useDispatch();
@@ -21,14 +21,23 @@ const AddTask = () => {
   const handleTaskSubmit = () => {
     dispatch(
       postTaskAndRenew({
-        title: taskTitle,
+        emergency: null,
         status: false,
-        date: taskDate.date,
-        type: taskDate.view,
+        date: {
+          inside: false,
+          amount: null,
+          repeat: false,
+          rool: null,
+          dates: [{ date: taskDate.date, time: taskDate.time }],
+        },
+        title: taskTitle,
+        description: null,
+        parent: null,
+        children: null
       })
     );
     setTaskTitle('');
-    setTaskDate({ date: dayjs(), view: 'day' });
+    setTaskDate({ date: dayjs(), time: false });
   };
 
   // console.log('1. add task (task date) - ', taskDate);
