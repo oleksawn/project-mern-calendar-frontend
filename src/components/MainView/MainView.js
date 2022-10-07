@@ -2,7 +2,7 @@ import AddTask from '../AddTask/AddTask';
 import TimeView from '../../common/TimeView/TimeView';
 import { useSelector } from 'react-redux';
 import dayjs from 'dayjs';
-import { Paper } from '@mui/material';
+import { Paper, Typography } from '@mui/material';
 import { useState } from 'react';
 
 const MainView = ({ dateForView }) => {
@@ -31,6 +31,7 @@ const MainView = ({ dateForView }) => {
       sx={{ backgroundColor: 'block.white', boxSizing: 'border-box' }}
     >
       <div className="main_wrapper">
+        <Typography variant="icon">ToDos with time for selected date</Typography>
         {dateForView.view === 'day' && (
           <TimeView date={dateForView.date} tasks={getTimedTasksForDate()} />
         )}

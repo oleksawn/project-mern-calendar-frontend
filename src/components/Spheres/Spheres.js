@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux/es/exports';
 import dayjs from 'dayjs';
 
-import { Paper } from '@mui/material';
+import { Paper, Typography } from '@mui/material';
 import PopMenuDrawer from '../../common/Drawer/PopMenuDrawer';
 import InlineMenuDrawer from '../../common/Drawer/InlineMenuDrawer';
 import SpheresMenu from './SpheresMenu';
@@ -53,6 +53,8 @@ const Spheres = ({ windowSize, dateForView }) => {
         >
           {status === 'loading' && <CircularProgress />}
           {error && <p>{error.message}</p>}
+
+          <Typography variant="icon">All ToDos</Typography>
           {tasks.length > 0 &&
             tasks.map((task) => {
               return <Task task={task} key={task._id} block="spheres" />;
@@ -79,6 +81,7 @@ const Spheres = ({ windowSize, dateForView }) => {
           >
             {status === 'loading' && <CircularProgress />}
             {error && <p>{error.message}</p>}
+            <Typography variant="icon">All ToDos</Typography>
             {tasks.length > 0 &&
               tasks.map((task) => {
                 return <Task task={task} key={task._id} block="spheres" />;

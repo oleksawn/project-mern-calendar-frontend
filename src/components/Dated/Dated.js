@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux/es/exports';
 import dayjs from 'dayjs';
-import { Paper, CircularProgress } from '@mui/material';
+import { Paper, CircularProgress, Typography } from '@mui/material';
 import Task from '../../common/Task/Task';
 
 const Dated = ({ dateForView }) => {
@@ -39,6 +39,7 @@ const Dated = ({ dateForView }) => {
       )}
       {error && <p>{error.message}</p>}
 
+      <Typography variant="icon">ToDos for selected date</Typography>
       {dateForView.view === 'day' &&
         getDayTasks().length > 0 &&
         getDayTasks().map((task) => {
