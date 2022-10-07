@@ -108,26 +108,28 @@ const Dated = ({ dateForView }) => {
       {dateForView.view === 'day' &&
         getDayTasks().length > 0 &&
         orderTasks(getDayTasks()).map((task, i) => {
-          return (
-            <div
-              key={task._id}
-              draggable
-              onDragStart={(e) => dragStart(e, i)}
-              onDragOver={dragOver}
-              onDrop={drop}
-              onDragEnter={dragEnter}
-              onDragLeave={dragLeave}
-              style={{
-                width: '100%',
-                paddingTop: '6px',
-                marginTop: '2px',
-              }}
-              id={task._id}
-              className="box"
-            >
-              <Task task={task} block="dated" dateForView={dateForView} />
-            </div>
-          );
+          if (task) {
+            return (
+              <div
+                key={task._id}
+                draggable
+                onDragStart={(e) => dragStart(e, i)}
+                onDragOver={dragOver}
+                onDrop={drop}
+                onDragEnter={dragEnter}
+                onDragLeave={dragLeave}
+                style={{
+                  width: '100%',
+                  paddingTop: '6px',
+                  marginTop: '2px',
+                }}
+                id={task._id}
+                className="box"
+              >
+                <Task task={task} block="dated" dateForView={dateForView} />
+              </div>
+            );
+          }
         })}
     </Paper>
   );
