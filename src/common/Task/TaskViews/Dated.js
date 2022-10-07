@@ -28,7 +28,7 @@ const Dated = ({
       expanded={expanded}
       onChange={() => setExpanded(!expanded)}
       sx={{
-        margin: '6px 6px',
+        margin: 0,
         marginLeft: '20px',
         padding: '1px',
         borderRight: 24,
