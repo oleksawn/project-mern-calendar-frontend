@@ -3,6 +3,7 @@ import { useState } from 'react';
 import dayjs from 'dayjs';
 import { Paper, CircularProgress, Typography } from '@mui/material';
 import Task from '../../common/Task/Task';
+import { useRef } from 'react';
 // import { Box } from '@mui/system';
 
 const Dated = ({ dateForView }) => {
@@ -30,6 +31,9 @@ const Dated = ({ dateForView }) => {
   };
 
   const [taskOrder, setTaskOrder] = useState(null);
+  const draggedItem = useRef(null);
+  const box = useRef(null);
+
   const orderTasks = (tasks) => {
     if (taskOrder === null) {
       // console.log('no order');
@@ -51,44 +55,21 @@ const Dated = ({ dateForView }) => {
     }
   };
 
-  const dragStart = (e, position) => {
-    e.dataTransfer.setData('text/plain', e.target.id);
+  const onDragOver = (e) => {
+    e.preventDefault();
   };
 
-  const dragOver = (e) => {
-    if (e.target.className === 'box') {
-      e.preventDefault();
-    }
+  const onDragEnd = (e) => {
+    const newOrder = [...taskOrder];
+
+    const itemId = newOrder[draggedItem.current];
+    const boxId = newOrder[box.current];
+    newOrder.splice(draggedItem.current, 1);
+    newOrder.splice(box.current, 0, itemId);
+    
+    setTaskOrder(newOrder);
   };
 
-  const dragEnter = (e) => {
-    if (e.target.className === 'box') {
-      e.target.style.borderTop = '2px solid #e0e4e7';
-    }
-  };
-  const dragLeave = (e) => {
-    if (e.target.className === 'box') {
-      e.target.style.borderTop = '2px solid transparent';
-    }
-  };
-
-  const drop = (e) => {
-    if (e.target.className === 'box') {
-      const itemId = e.dataTransfer.getData('text/plain');
-      if (itemId !== e.target.id) {
-        const newOrder = taskOrder.concat();
-        const itemIndex = newOrder.indexOf(itemId);
-        newOrder.splice(itemIndex, 1);
-        console.log(newOrder, 'item ', itemId, itemIndex);
-        const boxIndex = newOrder.indexOf(e.target.id);
-        newOrder.splice(boxIndex, 0, itemId);
-        console.log(newOrder, 'box ', boxIndex);
-        console.log(newOrder);
-        setTaskOrder(newOrder);
-        e.target.style.borderTop = '2px solid transparent';
-      }
-    }
-  };
 
   // console.log('Dated: view, date, tasks for view ', dateForView.time, dateForView.date, datedTasks);
   return (
@@ -113,11 +94,10 @@ const Dated = ({ dateForView }) => {
               <div
                 key={task._id}
                 draggable
-                onDragStart={(e) => dragStart(e, i)}
-                onDragOver={dragOver}
-                onDrop={drop}
-                onDragEnter={dragEnter}
-                onDragLeave={dragLeave}
+                onDragStart={(e) => (draggedItem.current = i)}
+                onDragEnter={(e) => (box.current = i)}
+                onDragOver={onDragOver}
+                onDragEnd={onDragEnd}
                 style={{
                   width: '100%',
                   paddingTop: '6px',
