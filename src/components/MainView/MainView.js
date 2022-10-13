@@ -1,29 +1,12 @@
 import AddTask from '../AddTask/AddTask';
-import TimeView from '../../common/TimeView/TimeView';
+import TimeGrid from '../../common/TimeGrid/TimeGrid';
 import { useSelector } from 'react-redux';
-import dayjs from 'dayjs';
+import { getDayTasks } from './../taskFilters';
 import { Paper, Typography } from '@mui/material';
-import { useState } from 'react';
+import { useRef } from 'react';
 
 const MainView = ({ dateForView }) => {
   const { tasks, error, status } = useSelector((state) => state.tasks) || [];
-
-  const getTimedTasksForDate = () => {
-    return tasks.filter((task) => {
-      if (task.date.inside === false) {
-        for (let i = 0; i < task.date.dates.length; i++) {
-          if (
-            task.date.dates[i].time &&
-            dayjs(task.date.dates[i].date).isSame(dateForView.date, 'day')
-          ) {
-            return true;
-          }
-        }
-      }
-      return false;
-    });
-    // console.log('main: timed tasks for date ', timedTasks);
-  };
 
   return (
     <Paper
@@ -31,9 +14,14 @@ const MainView = ({ dateForView }) => {
       sx={{ backgroundColor: 'block.white', boxSizing: 'border-box' }}
     >
       <div className="main_wrapper">
-        <Typography variant="icon">ToDos with time for selected date</Typography>
+        <Typography variant="icon">
+          ToDos with time for selected date
+        </Typography>
         {dateForView.view === 'day' && (
-          <TimeView date={dateForView.date} tasks={getTimedTasksForDate()} />
+          <TimeGrid
+            date={dateForView.date}
+            tasks={getDayTasks(tasks, true, dateForView)}
+          />
         )}
       </div>
 

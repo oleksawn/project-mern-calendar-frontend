@@ -1,29 +1,9 @@
 import { createMinutesCells } from './helpers';
 import Minute from './Minute';
-import dayjs from 'dayjs';
-var isBetween = require('dayjs/plugin/isBetween');
-dayjs.extend(isBetween);
+import { filterTasksByMinute } from './helpers';
 
 const Hour = ({ hour, tasks, setTopZIndex, topZIndex }) => {
   const minutesCells = createMinutesCells();
-
-  const filterTasksByMinute = (tasks, minute) => {
-    return tasks.filter((task) => {
-      for (let i = 0; i < task.date.dates.length; i++) {
-        if (
-          dayjs(task.date.dates[i].date).isBetween(
-            dayjs(task.date.dates[i].date).minute(minute),
-            dayjs(task.date.dates[i].date).minute(minute + 15),
-            'minute',
-            '[)'
-          )
-        ) {
-          return true;
-        }
-      }
-      return false;
-    });
-  };
 
   return (
     <div
